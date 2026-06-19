@@ -66,8 +66,10 @@ class Money:
         return Money(self.amount - other.amount, self.currency)
 
     def __mul__(self, factor: Numeric) -> "Money":
+        #if isinstance(factor, Money):
+            #raise TypeError("Cannot multiply Money by Money — multiply by a scalar.")
         if isinstance(factor, Money):
-            raise TypeError("Cannot multiply Money by Money — multiply by a scalar.")
+            return Money(self.amount * factor.amount, self.currency)
         if isinstance(factor, float):
             raise TypeError("Cannot multiply Money by float. Use Decimal or int.")
         return Money(self.amount * Decimal(factor), self.currency)
